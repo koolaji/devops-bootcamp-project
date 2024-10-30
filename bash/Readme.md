@@ -206,3 +206,197 @@ Filter by User ID: Allow users to input a specific user ID when running the scri
 
 Detailed Report of Failed Attempts: Extend the report to include timestamps and actions for all failed attempts, presenting them in a list format.  
 
+#### Overview of the Task3
+_Objective_: Teach students how to process CSV files in Bash, focusing on column selection and data extraction.
+
+Instructions:
+
+Create the CSV Log File: Save the provided sample CSV content in a file named activity_log.csv.
+
+Bash Script: Students should write a Bash script (parse_csv_log.sh) that performs the following tasks:  
+
+Uses cut, awk, or IFS to select specific columns (e.g., Timestamp and Status).
+Counts how many times each user appears in the log.  
+Generates a summary of actions per user.
+Example Script for Students: parse_csv_log.sh
+Here's an example Bash script to guide the students in completing the task:  
+```log
+Timestamp,UserID,Action,Status
+2024-10-30 09:00:01,12345,login,success
+2024-10-30 09:05:32,12345,view_page,success
+2024-10-30 09:10:45,67890,login,failed
+2024-10-30 09:12:15,67890,view_page,success
+2024-10-30 09:15:30,12345,logout,success
+2024-10-30 09:20:01,67890,logout,failed
+2024-10-30 09:25:45,12345,upload_file,success
+2024-10-30 09:30:00,67890,upload_file,success
+2024-10-30 09:35:15,12345,view_page,failed
+2024-10-30 09:40:10,67890,delete_file,success
+```
+```bash
+#!/bin/bash
+
+# Path to the CSV log file
+CSV_FILE="activity_log.csv"
+
+# Check if the CSV file exists
+if [[ ! -f "$CSV_FILE" ]]; then
+    echo "CSV file not found! Please ensure that '$CSV_FILE' exists."
+    exit 1
+fi
+
+# Initialize an associative array to count actions per user
+declare -A user_count
+
+# Read the CSV file line by line, skipping the header
+tail -n +2 "$CSV_FILE" | while IFS=',' read -r timestamp user_id action status; do
+    # Increment the user count
+    ((user_count[$user_id]++))
+done
+
+# Output the summary report
+echo "User Action Summary:"
+echo "---------------------"
+for user_id in "${!user_count[@]}"; do
+    echo "UserID: $user_id | Actions Count: ${user_count[$user_id]}"
+done
+```
+```bash
+#!/bin/bash
+
+# Path to the CSV log file
+CSV_FILE="activity_log.csv"
+
+# Check if the CSV file exists
+if [[ ! -f "$CSV_FILE" ]]; then
+    echo "CSV file not found! Please ensure that '$CSV_FILE' exists."
+    exit 1
+fi
+
+# Use awk to count actions per user and display timestamps and statuses
+awk -F',' '
+NR > 1 { 
+    user_count[$2]++                   # Count actions per UserID
+    print $1, $2, $4                   # Print Timestamp, UserID, and Status
+}
+END { 
+    print "\nUser Action Summary:"
+    print "---------------------"
+    for (user_id in user_count) {
+        print "UserID: " user_id " | Actions Count: " user_count[user_id]
+    }
+}' "$CSV_FILE"
+```
+
+Advanced Task: Comprehensive Log Analysis with Filtering and Reporting (1.5 hours)
+Objective: Write a Bash script that analyzes a CSV log file and generates detailed reports based on user input, including error handling and filtering capabilities.  
+
+Activity Overview
+Log File: Use the CSV log file activity_log.csv provided in previous tasks.
+Bash Script: Create a script (advanced_log_analysis.sh) that:
+Prompts the user for a specific UserID to filter actions.
+Validates the input and checks if the UserID exists in the log.
+Generates a detailed report for that user, including:
+Total actions performed.
+Counts of successful and failed actions.
+A chronological list of actions performed by the user with timestamps.
+Includes error handling for invalid user input and provides appropriate feedback.
+Sample CSV Log File: activity_log.csv
+```log
+Timestamp,UserID,Action,Status
+2024-10-30 09:00:01,12345,login,success
+2024-10-30 09:05:32,12345,view_page,success
+2024-10-30 09:10:45,67890,login,failed
+2024-10-30 09:12:15,67890,view_page,success
+2024-10-30 09:15:30,12345,logout,success
+2024-10-30 09:20:01,67890,logout,failed
+2024-10-30 09:25:45,12345,upload_file,success
+2024-10-30 09:30:00,67890,upload_file,success
+2024-10-30 09:35:15,12345,view_page,failed
+2024-10-30 09:40:10,67890,delete_file,success
+```
+
+#### Task 4: Parsing YAML Configurations (1 hour)
+Objective: Familiarize students with handling YAML files in Bash, specifically using yq as a YAML parser to extract specific fields.
+
+#### Activity Overview
+YAML File: Provide a sample YAML file that contains configuration details for multiple services.
+Bash Script: Create a script (parse_yaml.sh) that:
+Uses yq to extract the names and ports of all services.
+Generates a report listing each service with its respective port.
+```yaml
+services:
+  - name: web
+    port: 80
+    protocol: tcp
+  - name: database
+    port: 5432
+    protocol: tcp
+  - name: cache
+    port: 6379
+    protocol: tcp
+  - name: message_queue
+    port: 5672
+    protocol: tcp
+```
+
+```bash
+#!/bin/bash
+
+# Path to the YAML file
+YAML_FILE="services.yaml"
+
+# Check if the YAML file exists
+if [[ ! -f "$YAML_FILE" ]]; then
+    echo "YAML file not found! Please ensure that '$YAML_FILE' exists."
+    exit 1
+fi
+
+# Use yq to extract service names and ports
+echo "Service Port Report:"
+echo "----------------------"
+
+# Extract services and their respective ports
+yq '.services[] | "\(.name): \(.port)"' "$YAML_FILE"
+```
+#### Advanced Homework: Comprehensive YAML Configuration Analysis (2 hours)
+Objective: Write a Bash script that analyzes a YAML configuration file, extracting and reporting detailed information based on user-defined criteria.
+
+Activity Overview
+YAML File: Provide a sample YAML file containing configurations for various services, including additional metadata.
+Bash Script: Create a script (advanced_yaml_analysis.sh) that:
+Prompts the user to specify a service name.
+Validates the user input and checks if the specified service exists.
+Generates a detailed report that includes:
+The service name.
+The port number.
+The protocol.
+Additional metadata (e.g., environment variables).
+If the service has environment variables, the script should list them.
+```yaml
+services:
+  - name: web
+    port: 80
+    protocol: tcp
+    env:
+      - NAME: "WEBSITE_NAME"
+        VALUE: "MyWebsite"
+  - name: database
+    port: 5432
+    protocol: tcp
+    env:
+      - NAME: "DB_USER"
+        VALUE: "admin"
+      - NAME: "DB_PASS"
+        VALUE: "securepassword"
+  - name: cache
+    port: 6379
+    protocol: tcp
+    env: []
+  - name: message_queue
+    port: 5672
+    protocol: tcp
+    env:
+      - NAME: "MQ_USER"
+        VALUE: "mquser"
+```
