@@ -97,3 +97,112 @@ ERROR count: 2
 2024-10-30 08:53:49 [ERROR] Unexpected application crash detected
 2024-10-30 08:55:01 [FATAL] Kernel panic - critical system failure
 ```
+### Task 2: Parsing a JSON Log File
+*Goal*: Teach students how to process JSON   files in Bash, focusing on extracting values, counting occurrences, and summarizing data.  
+
+#### Step 1: Sample JSON Log File Creation  
+Provide a sample JSON log file, activity_log.json, for students to analyze.  
+
+Sample activity_log.json Content:
+```log 
+[
+  {"timestamp": "2024-10-30T09:00:01Z", "userID": 12345, "action": "login", "status": "success"},
+  {"timestamp": "2024-10-30T09:05:32Z", "userID": 12345, "action": "view_page", "status": "success"},
+  {"timestamp": "2024-10-30T09:10:45Z", "userID": 67890, "action": "login", "status": "failed"},
+  {"timestamp": "2024-10-30T09:12:15Z", "userID": 67890, "action": "view_page", "status": "success"},
+  {"timestamp": "2024-10-30T09:15:30Z", "userID": 12345, "action": "logout", "status": "success"},
+  {"timestamp": "2024-10-30T09:20:01Z", "userID": 67890, "action": "logout", "status": "failed"},
+  {"timestamp": "2024-10-30T09:22:11Z", "userID": 12345, "action": "upload_file", "status": "success"},
+  {"timestamp": "2024-10-30T09:25:55Z", "userID": 67890, "action": "upload_file", "status": "success"},
+  {"timestamp": "2024-10-30T09:30:01Z", "userID": 67890, "action": "delete_file", "status": "success"},
+  {"timestamp": "2024-10-30T09:35:15Z", "userID": 12345, "action": "view_page", "status": "failed"}
+]
+```
+#### Step 2: Script to Parse the JSON File
+Students can use the jq command-line tool to parse the JSON data. Ensure that they have jq installed. Here's the script they will create.
+
+File: parse_json_log.sh
+```bash
+#!/bin/bash
+
+# Path to the JSON log file
+JSON_FILE="activity_log.json"
+
+# Check if the JSON file exists
+if [[ ! -f "$JSON_FILE" ]]; then
+  echo "JSON file not found! Please ensure that '$JSON_FILE' exists."
+  exit 1
+fi
+
+# Initialize counters
+success_count=0
+failed_count=0
+
+# Read the JSON file and count successes and failures
+success_count=$(jq '[.[] | select(.status == "success")] | length' "$JSON_FILE")
+failed_count=$(jq '[.[] | select(.status == "failed")] | length' "$JSON_FILE")
+
+# Output the results
+echo "JSON Log Analysis Report"
+echo "------------------------"
+echo "Total Success Actions: $success_count"
+echo "Total Failed Actions  : $failed_count"
+
+# Save the report to a file
+REPORT_FILE="json_log_analysis_report.txt"
+{
+  echo "JSON Log Analysis Report"
+  echo "------------------------"
+  echo "Total Success Actions: $success_count"
+  echo "Total Failed Actions  : $failed_count"
+} > "$REPORT_FILE"
+
+echo "Report saved to '$REPORT_FILE'."
+```
+#### Step 3: Run the Script
+Make the script executable and run it:
+```bash
+chmod +x parse_json_log.sh
+./parse_json_log.sh
+```
+#### Expected Output
+When students run the script, they should see output similar to this:
+```log 
+JSON Log Analysis Report
+------------------------
+Total Success Actions: 6
+Total Failed Actions  : 3
+Report saved to 'json_log_analysis_report.txt'.
+```
+#### homework
+```log 
+[
+  {"timestamp": "2024-10-30T09:00:01Z", "userID": 12345, "action": "login", "status": "success"},
+  {"timestamp": "2024-10-30T09:05:32Z", "userID": 12345, "action": "view_page", "status": "success"},
+  {"timestamp": "2024-10-30T09:10:45Z", "userID": 67890, "action": "login", "status": "failed"},
+  {"timestamp": "2024-10-30T09:12:15Z", "userID": 67890, "action": "view_page", "status": "success"},
+  {"timestamp": "2024-10-30T09:15:30Z", "userID": 12345, "action": "logout", "status": "success"},
+  {"timestamp": "2024-10-30T09:20:01Z", "userID": 67890, "action": "logout", "status": "failed"},
+  {"timestamp": "2024-10-30T09:22:11Z", "userID": 12345, "action": "upload_file", "status": "success"},
+  {"timestamp": "2024-10-30T09:25:55Z", "userID": 67890, "action": "upload_file", "status": "success"},
+  {"timestamp": "2024-10-30T09:30:01Z", "userID": 67890, "action": "delete_file", "status": "success"},
+  {"timestamp": "2024-10-30T09:35:15Z", "userID": 12345, "action": "view_page", "status": "failed"},
+  {"timestamp": "2024-10-30T09:40:10Z", "userID": 12345, "action": "login", "status": "success"},
+  {"timestamp": "2024-10-30T09:42:00Z", "userID": 67890, "action": "upload_file", "status": "failed"},
+  {"timestamp": "2024-10-30T09:45:55Z", "userID": 12345, "action": "delete_file", "status": "success"},
+  {"timestamp": "2024-10-30T09:48:33Z", "userID": 67890, "action": "view_page", "status": "success"},
+  {"timestamp": "2024-10-30T09:50:30Z", "userID": 67890, "action": "logout", "status": "success"}
+]
+```
+#### homework
+#### Explanation of Extended Log Entries
+Diverse Actions: The log includes various actions (login, view_page, logout, upload_file, delete_file) to provide a broad spectrum for analysis.  
+Multiple Statuses: Each action has a status of either success or failed, allowing for a detailed count and analysis of successful versus failed actions.  
+Timestamp: Each entry includes a timestamp, which is useful for temporal analysis, such as counting actions within specific time frames.   
+Suggested Extensions for the Analysis Script
+Count Actions by User: Modify the script to count the number of actions performed by each user and print that information in the report.   
+
+Filter by User ID: Allow users to input a specific user ID when running the script to filter the report to that user’s actions.   
+
+Detailed Report of Failed Attempts: Extend the report to include timestamps and actions for all failed attempts, presenting them in a list format.  
+
