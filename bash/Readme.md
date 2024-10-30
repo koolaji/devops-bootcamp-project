@@ -400,3 +400,39 @@ services:
       - NAME: "MQ_USER"
         VALUE: "mquser"
 ```
+
+
+#### Homework: Automating Tasks with Crontab (1 hour)
+Objective: Learn how to use crontab to schedule automated tasks, enhancing system management and maintenance skills.
+
+Activity Overview
+Task Description: Students will create a Bash script that performs a simple task, such as backing up a directory or logging system information. They will then schedule this script to run at regular intervals using crontab.
+
+Bash Script: Create a script (backup.sh) that:
+
+Backs up a specified directory to a backup location.
+Logs the date and time of each backup in a log file.
+```bash 
+#!/bin/bash
+
+# Directory to back up
+SOURCE_DIR="/path/to/source_directory"
+# Backup destination
+BACKUP_DIR="/path/to/backup_directory"
+# Log file
+LOG_FILE="/path/to/backup_log.txt"
+
+# Create a backup directory if it doesn't exist
+mkdir -p "$BACKUP_DIR"
+
+# Perform the backup
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+BACKUP_FILE="backup_$TIMESTAMP.tar.gz"
+
+if tar -czf "$BACKUP_DIR/$BACKUP_FILE" "$SOURCE_DIR"; then
+    echo "Backup successful: $BACKUP_FILE" >> "$LOG_FILE"
+    echo "Backup performed on $(date)" >> "$LOG_FILE"
+else
+    echo "Backup failed for $SOURCE_DIR" >> "$LOG_FILE"
+fi
+```
