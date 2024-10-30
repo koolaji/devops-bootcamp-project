@@ -436,3 +436,7 @@ else
     echo "Backup failed for $SOURCE_DIR" >> "$LOG_FILE"
 fi
 ```
+```bash 
+crontab -e
+0 2 * * * /path/to/backup.sh
+```
