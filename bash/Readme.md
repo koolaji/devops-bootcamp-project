@@ -98,10 +98,10 @@ ERROR count: 2
 2024-10-30 08:55:01 [FATAL] Kernel panic - critical system failure
 ```
 ### Task 2: Parsing a JSON Log File
-*Goal*: Teach students how to process JSON   files in Bash, focusing on extracting values, counting occurrences, and summarizing data.  
+*Goal*: processing JSON   files in Bash, focusing on extracting values, counting occurrences, and summarizing data.  
 
 #### Step 1: Sample JSON Log File Creation  
-Provide a sample JSON log file, activity_log.json, for students to analyze.  
+Provide a sample JSON log file, activity_log.json, to analyze.  
 
 Sample activity_log.json Content:
 ```log 
