@@ -2,8 +2,6 @@
 *_Goal_*: Parse a log file to identify the number of each type of log entry (e.g., ERROR, WARN, INFO) and output a report summarizing these counts.
 
 *Step 1*: Sample Log File Creation  
-Provide a sample log file, application.log,   which students will analyze.
-
 Sample application.log Content:
 ```log
 2024-10-30 10:15:32 [INFO] Application started
@@ -60,7 +58,6 @@ chmod +x parse_logs.sh
 ./parse_logs.sh
 ```
 *Expected Output*
-When students run the script, they should see output similar to this:
 ```
 Log Analysis Report
 --------------------
@@ -98,10 +95,10 @@ ERROR count: 2
 2024-10-30 08:55:01 [FATAL] Kernel panic - critical system failure
 ```
 ### Task 2: Parsing a JSON Log File
-*Goal*: Teach students how to process JSON   files in Bash, focusing on extracting values, counting occurrences, and summarizing data.  
+*Goal*: processing JSON   files in Bash, focusing on extracting values, counting occurrences, and summarizing data.  
 
 #### Step 1: Sample JSON Log File Creation  
-Provide a sample JSON log file, activity_log.json, for students to analyze.  
+Provide a sample JSON log file, activity_log.json, to analyze.  
 
 Sample activity_log.json Content:
 ```log 
@@ -119,7 +116,7 @@ Sample activity_log.json Content:
 ]
 ```
 #### Step 2: Script to Parse the JSON File
-Students can use the jq command-line tool to parse the JSON data. Ensure that they have jq installed. Here's the script they will create.
+use the jq command-line tool to parse the JSON data. Ensure that they have jq installed. Here's the script they will create.
 
 File: parse_json_log.sh
 ```bash
@@ -166,7 +163,7 @@ chmod +x parse_json_log.sh
 ./parse_json_log.sh
 ```
 #### Expected Output
-When students run the script, they should see output similar to this:
+When run the script, they should see output similar to this:
 ```log 
 JSON Log Analysis Report
 ------------------------
@@ -200,26 +197,26 @@ Diverse Actions: The log includes various actions (login, view_page, logout, upl
 Multiple Statuses: Each action has a status of either success or failed, allowing for a detailed count and analysis of successful versus failed actions.  
 Timestamp: Each entry includes a timestamp, which is useful for temporal analysis, such as counting actions within specific time frames.   
 Suggested Extensions for the Analysis Script
-Count Actions by User: Modify the script to count the number of actions performed by each user and print that information in the report.   
+Count Actions by User: Modify the script to count the actions performed by each user and print that information in the report.   
 
 Filter by User ID: Allow users to input a specific user ID when running the script to filter the report to that user’s actions.   
 
 Detailed Report of Failed Attempts: Extend the report to include timestamps and actions for all failed attempts, presenting them in a list format.  
 
 #### Overview of the Task3
-_Objective_: Teach students how to process CSV files in Bash, focusing on column selection and data extraction.
+_Objective_: how to process CSV files in Bash, focusing on column selection and data extraction.
 
 Instructions:
 
 Create the CSV Log File: Save the provided sample CSV content in a file named activity_log.csv.
 
-Bash Script: Students should write a Bash script (parse_csv_log.sh) that performs the following tasks:  
+Bash Script: should write a Bash script (parse_csv_log.sh) that performs the following tasks:  
 
 Uses cut, awk, or IFS to select specific columns (e.g., Timestamp and Status).
 Counts how many times each user appears in the log.  
 Generates a summary of actions per user.
-Example Script for Students: parse_csv_log.sh
-Here's an example Bash script to guide the students in completing the task:  
+Example Script: parse_csv_log.sh
+Here's an example Bash script:  
 ```log
 Timestamp,UserID,Action,Status
 2024-10-30 09:00:01,12345,login,success
@@ -317,7 +314,7 @@ Timestamp,UserID,Action,Status
 ```
 
 #### Task 4: Parsing YAML Configurations (1 hour)
-Objective: Familiarize students with handling YAML files in Bash, specifically using yq as a YAML parser to extract specific fields.
+Objective: Familiarize with handling YAML files in Bash, specifically using yq as a YAML parser to extract specific fields.
 
 #### Activity Overview
 YAML File: Provide a sample YAML file that contains configuration details for multiple services.
@@ -406,7 +403,7 @@ services:
 Objective: Learn how to use crontab to schedule automated tasks, enhancing system management and maintenance skills.
 
 Activity Overview
-Task Description: Students will create a Bash script that performs a simple task, such as backing up a directory or logging system information. They will then schedule this script to run at regular intervals using crontab.
+Task Description: create a Bash script that performs a simple task, such as backing up a directory or logging system information. They will then schedule this script to run at regular intervals using crontab.
 
 Bash Script: Create a script (backup.sh) that:
 
