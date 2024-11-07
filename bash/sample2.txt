@@ -1,0 +1,12 @@
+Timestamp,UserID,Action,Status
+2024-10-30 09:00:01,12345,login,success
+2024-10-30 09:05:32,12345,view_page,success
+2024-10-30 09:10:45,67890,login,failed
+2024-10-30 09:12:15,67890,view_page,success
+2024-10-30 09:15:30,12345,logout,success
+2024-10-30 09:20:01,67890,logout,failed
+2024-10-30 09:25:45,12345,upload_file,success
+2024-10-30 09:30:00,67890,upload_file,success
+2024-10-30 09:35:15,12345,view_page,failed
+2024-10-30 09:40:10,67890,delete_file,success
+

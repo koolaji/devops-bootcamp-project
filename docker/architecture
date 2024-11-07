@@ -1,0 +1,21 @@
+project-management/
+├── docker-compose.yml
+├── .env
+├── frontend/
+│   ├── Dockerfile
+│   ├── src/
+│   │   └── index.js
+├── backend/
+│   ├── Dockerfile
+│   ├── src/
+│   │   └── app.js
+├── worker/
+│   ├── Dockerfile
+│   └── src/
+│       └── worker.js
+├── nginx/
+│   └── nginx.conf
+└── monitoring/
+    ├── prometheus.yml
+    └── grafana/
+

@@ -1,0 +1,26 @@
+services:
+  - name: web
+    port: 80
+    protocol: tcp
+    env:
+      - NAME: "WEBSITE_NAME"
+        VALUE: "MyWebsite"
+  - name: database
+    port: 5432
+    protocol: tcp
+    env:
+      - NAME: "DB_USER"
+        VALUE: "admin"
+      - NAME: "DB_PASS"
+        VALUE: "securepassword"
+  - name: cache
+    port: 6379
+    protocol: tcp
+    env: []
+  - name: message_queue
+    port: 5672
+    protocol: tcp
+    env:
+      - NAME: "MQ_USER"
+        VALUE: "mquser"
+
