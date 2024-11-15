@@ -212,17 +212,16 @@ spec:
   selector:
     app: contour
   type: LoadBalancer
-
+```
 ## Summary Comparison of Ingress Controllers
 
-| **Feature**                  | **NGINX**              | **Traefik**           | **Istio**                  | **Contour**              |
-|------------------------------|------------------------|-----------------------|----------------------------|--------------------------|
-| **Type**                      | Layer 7                | Layer 7               | Layer 7                    | Layer 7                  |
-| **TLS Termination**           | Yes                    | Yes                   | Yes                        | Yes                      |
-| **Traffic Routing**           | Path/Host              | Path/Host             | Advanced                   | Path/Host                |
-| **Service Discovery**         | Manual                 | Auto                  | Auto                       | Auto                     |
-| **SSL Management**            | Manual                 | Let's Encrypt         | Mutual TLS                 | Manual                   |
-| **Advanced Features**         | Rate Limiting, Rewrites| Auto Service Discovery, Middleware | Traffic Splitting, Security | Rate Limiting, Traffic Splitting |
-| **Best for**                  | Standard Apps          | Microservices         | Microservices, Security    | High-performance apps    |
-
+| **Feature**                  | **NGINX**            | **Traefik**           | **Istio**               | **Contour**             |
+|------------------------------|----------------------|-----------------------|-------------------------|-------------------------|
+| **Type**                     | Layer 7              | Layer 7               | Layer 7                 | Layer 7                 |
+| **TLS Termination**           | Yes                  | Yes                   | Yes                     | Yes                     |
+| **Traffic Routing**           | Path/Host            | Path/Host             | Advanced                | Path/Host               |
+| **Service Discovery**         | Manual               | Auto                  | Auto                    | Auto                    |
+| **SSL Management**            | Manual               | Let's Encrypt         | Mutual TLS              | Manual                  |
+| **Advanced Features**         | Rate Limiting, Rewrites | Auto Service Discovery, Middleware | Traffic Splitting, Security | Rate Limiting, Traffic Splitting |
+| **Best for**                  | Standard Apps        | Microservices         | Microservices, Security | High-performance apps   |
 
