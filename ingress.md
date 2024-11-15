@@ -212,7 +212,7 @@ spec:
   selector:
     app: contour
   type: LoadBalancer
-```table
+
 ## Summary Comparison of Ingress Controllers
 
 | **Feature**                  | **NGINX** | **Traefik** | **Istio** | **Contour** |
@@ -224,4 +224,4 @@ spec:
 | **SSL Management**            | Manual    | Let's Encrypt | Mutual TLS | Manual      |
 | **Advanced Features**         | Rate Limiting, Rewrites | Auto Service Discovery, Middleware | Traffic Splitting, Security | Rate Limiting, Traffic Splitting |
 | **Best for**                  | Standard Apps | Microservices | Microservices, Security | High-performance apps |
-```
+
