@@ -50,6 +50,8 @@ Use cases:
 
 Ideal for clusters with multi-cloud or hybrid-cloud configurations.
 Suitable when secure and encrypted communication is necessary.
+Docs[https://zivukushingai.medium.com/weave-net-a-deep-dive-into-kubernetes-network-plug-in-18d88131318c]
+
 
 D. Cilium
 Architecture:
