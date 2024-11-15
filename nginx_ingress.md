@@ -2,7 +2,7 @@
 Scenario: Route requests to different services based on URL paths, such as /api for a backend API and /frontend for a frontend UI.
 
 Example:
-
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -28,12 +28,14 @@ spec:
             name: frontend-service
             port:
               number: 80
+```
 Explanation: This Ingress routes requests sent to example.com/api to api-service and those sent to example.com/frontend to frontend-service.
 
 2. Domain-Based Routing (Virtual Hosting)
 Scenario: Route traffic based on subdomains like api.example.com and www.example.com.
 
 Example:
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -60,12 +62,14 @@ spec:
             name: frontend-service
             port:
               number: 80
+```
 Explanation: Requests sent to api.example.com are routed to api-service, while those sent to www.example.com are routed to frontend-service.
 
 3. TLS Termination and Redirects
 Scenario: Secure the Ingress with TLS and redirect HTTP traffic to HTTPS.
 
 Example:
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -88,12 +92,14 @@ spec:
             name: app-service
             port:
               number: 80
+```
 Explanation: This configuration enables HTTPS for example.com using the example-tls certificate and forces redirection from HTTP to HTTPS.
 
 4. Rate Limiting
 Scenario: Apply rate limiting, e.g., 10 requests per second per IP, to prevent abuse.
 
 Example:
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -113,12 +119,14 @@ spec:
             name: app-service
             port:
               number: 80
+```
 Explanation: Limits each client to 10 requests per second. The limit-burst-multiplier of 2 allows short bursts to exceed this rate.
 
 5. Load Balancing and Weighted Traffic Splitting (Canary Releases)
 Scenario: Route 90% of traffic to app-service and 10% to canary-service.
 
 Example:
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -138,13 +146,14 @@ spec:
             name: app-service
             port:
               number: 80
-
+```
 Explanation: This configuration routes 90% of the traffic to app-service and 10% to canary-service for canary testing.
 
 6. Basic Authentication
 Scenario: Protect a specific endpoint with basic authentication.
 
 Example:
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -165,12 +174,14 @@ spec:
             name: admin-service
             port:
               number: 80
+```
 Explanation: Requests to example.com/admin require basic authentication using credentials stored in a Kubernetes secret named basic-auth.
 
 7. Configuring Cross-Origin Resource Sharing (CORS)
 Scenario: Allow requests from https://otherdomain.com to access resources on /api.
 
 Example:
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -190,12 +201,14 @@ spec:
             name: api-service
             port:
               number: 80
+```
 Explanation: Allows requests from https://otherdomain.com to example.com/api to bypass CORS restrictions.
 
 8. Custom Error Pages
 Scenario: Redirect users to a custom 404 error page.
 
 Example:
+```yaml
 apiVersion: networking.k8s.io/v1
 kind: ConfigMap
 metadata:
@@ -233,5 +246,6 @@ spec:
       port: 80
   selector:
     app: error-page
+```
 Explanation: This example redirects users to a custom service, error-backend, which provides a custom error page for 404 errors.
 
