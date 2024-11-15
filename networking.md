@@ -33,6 +33,7 @@ Use cases:
 
 Large-scale clusters that require high-performance networking.  
 Organizations needing network policy enforcement and segmentation.  
+Docs [https://www.tigera.io/video/tigera-calico-fundamentals/]
 
 C. Weave Net
 Architecture:
