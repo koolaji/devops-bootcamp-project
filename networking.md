@@ -1,38 +1,38 @@
-### CNI (Container Network Interface)
-Kubernetes uses CNI (Container Network Interface) plugins to implement its networking model. A variety of CNI plugins are available, each offering different networking solutions for pods.
-A. Flannel
-Architecture:
+### CNI (Container Network Interface)  
+Kubernetes uses CNI (Container Network Interface) plugins to implement its networking model. A variety of CNI plugins are available, each offering different networking solutions for pods.  
+A. Flannel  
+Architecture:  
 
-Flannel provides an overlay network, allowing Pods to communicate across nodes.
-It uses VXLAN, UDP, or other encapsulation methods to tunnel Pod traffic across nodes.
-Flannel DaemonSet runs on every node, handling the network bridge and ensuring Pod IPs are routable.
+Flannel provides an overlay network, allowing Pods to communicate across nodes.  
+It uses VXLAN, UDP, or other encapsulation methods to tunnel Pod traffic across nodes.  
+Flannel DaemonSet runs on every node, handling the network bridge and ensuring Pod IPs are routable.  
 How it works:
 
-Each node gets a subnet of IPs (usually from a larger IP pool).
-Flannel assigns an IP from the node's subnet when a pod is created on a node.
-Flannel ensures communication between Pods on different nodes by encapsulating traffic within an overlay network.
+Each node gets a subnet of IPs (usually from a larger IP pool).  
+Flannel assigns an IP from the node's subnet when a pod is created on a node.  
+Flannel ensures communication between Pods on different nodes by encapsulating traffic within an overlay network.  
 Use cases:
 
-It is a simple networking setup that is great for small to medium clusters.
-Suitable for flat, non-hierarchical communication among Pods.
+It is a simple networking setup that is great for small to medium clusters.  
+Suitable for flat, non-hierarchical communication among Pods.  
 Doce[https://mvallim.github.io/kubernetes-under-the-hood/documentation/kube-flannel.html]
 
 
-B. Calico
-Architecture:
+B. Calico  
+Architecture:  
 
-Calico offers both network policy enforcement and an overlay network (or can operate without an overlay using BGP).
-It uses BGP (Border Gateway Protocol) to create a high-performance network with IP routing.
-Calico supports both Layer 3 networking (with routing) and Layer 2 (with overlay using VXLAN).
-How it works:
+Calico offers both network policy enforcement and an overlay network (or can operate without an overlay using BGP).  
+It uses BGP (Border Gateway Protocol) to create a high-performance network with IP routing.  
+Calico supports both Layer 3 networking (with routing) and Layer 2 (with overlay using VXLAN).  
+How it works:  
 
-Calico assigns a unique IP to each Pod.
-Pods can communicate across nodes either using routing (without encapsulation) or using VXLAN tunneling.
-Supports network policies for controlling traffic flow between Pods based on labels and namespaces.
-Use cases:
+Calico assigns a unique IP to each Pod.  
+Pods can communicate across nodes either using routing (without encapsulation) or using VXLAN tunneling.  
+Supports network policies for controlling traffic flow between Pods based on labels and namespaces.  
+Use cases:  
 
-Large-scale clusters that require high-performance networking.
-Organizations needing network policy enforcement and segmentation.
+Large-scale clusters that require high-performance networking.  
+Organizations needing network policy enforcement and segmentation.  
 
 C. Weave Net
 Architecture:
