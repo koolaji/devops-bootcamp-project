@@ -1,20 +1,18 @@
 ## Summary Comparison of Kubernetes CSI Drivers
 
-| **Feature**                      | **AWS EBS CSI**         | **GCE PD CSI**           | **Azure Disk CSI**      | **Ceph CSI**             | **Portworx CSI**         |
-|-----------------------------------|-------------------------|--------------------------|-------------------------|--------------------------|--------------------------|
-| **Provider**                      | AWS                     | Google Cloud             | Azure                   | Ceph                     | Portworx                 |
-| **Volume Types**                  | Block Storage           | Persistent Disk (PD)     | Managed Disks           | RBD (RADOS Block Device) | Block, File, Object      |
-| **Provisioning**                  | Dynamic & Static        | Dynamic & Static         | Dynamic & Static        | Dynamic & Static         | Dynamic & Static         |
-| **Snapshotting**                  | Yes                     | Yes                      | Yes                     | Yes                      | Yes                      |
-| **Volume Expansion**              | Yes                     | Yes                      | Yes                     | Yes                      | Yes                      |
-| **Volume Attach**                 | Yes                     | Yes                      | Yes                     | Yes                      | Yes                      |
-| **Access Modes**                  | ReadWriteOnce, ReadOnly | ReadWriteOnce, ReadOnly  | ReadWriteOnce, ReadOnly | ReadWriteOnce, ReadOnly  | ReadWriteOnce, ReadOnly  |
-| **Multizone Support**             | Yes                     | Yes                      | Yes                     | No                       | Yes                      |
-| **Encryption**                    | Yes (with KMS support)  | Yes (with KMS support)   | Yes (with Azure Key Vault) | Yes                     | Yes (with KMS support)   |
-| **Best For**                       | Block storage for cloud-native apps | Block storage for Google Cloud apps | Managed disks for Azure apps | Block storage in distributed environments | High-availability, high-performance storage for containerized workloads |
-| **Documentation**                 | [AWS EBS CSI Docs](https://docs.aws.amazon.com/eks/latest/userguide/persistent-storage-csi.html) | [GCE PD CSI Docs](https://kubernetes.io/docs/concepts/storage/volumes/#gce-pd) | [Azure Disk CSI Docs](https://learn.microsoft.com/en-us/azure/aks/azure-disk-csi-driver) | [Ceph CSI Docs](https://ceph.io/en/ceph-csi/) | [Portworx CSI Docs](https://docs.portworx.com/) |
-
----
+| **Feature**                      | **AWS EBS CSI**         | **GCE PD CSI**           | **Azure Disk CSI**      | **Ceph CSI**             | **Portworx CSI**         | **Longhorn CSI**         | **Localhost CSI**         |
+|-----------------------------------|-------------------------|--------------------------|-------------------------|--------------------------|--------------------------|--------------------------|--------------------------|
+| **Provider**                      | AWS                     | Google Cloud             | Azure                   | Ceph                     | Portworx                 | Longhorn                 | Localhost                |
+| **Volume Types**                  | Block Storage           | Persistent Disk (PD)     | Managed Disks           | RBD (RADOS Block Device) | Block, File, Object      | Block Storage            | Local Storage            |
+| **Provisioning**                  | Dynamic & Static        | Dynamic & Static         | Dynamic & Static        | Dynamic & Static         | Dynamic & Static         | Dynamic & Static         | Dynamic & Static         |
+| **Snapshotting**                  | Yes                     | Yes                      | Yes                     | Yes                      | Yes                      | Yes                      | Yes                      |
+| **Volume Expansion**              | Yes                     | Yes                      | Yes                     | Yes                      | Yes                      | Yes                      | Yes                      |
+| **Volume Attach**                 | Yes                     | Yes                      | Yes                     | Yes                      | Yes                      | Yes                      | Yes                      |
+| **Access Modes**                  | ReadWriteOnce, ReadOnly | ReadWriteOnce, ReadOnly  | ReadWriteOnce, ReadOnly | ReadWriteOnce, ReadOnly  | ReadWriteOnce, ReadOnly  | ReadWriteOnce, ReadOnly  | ReadWriteOnce, ReadOnly  |
+| **Multizone Support**             | Yes                     | Yes                      | Yes                     | No                       | Yes                      | Yes                      | No                       |
+| **Encryption**                    | Yes (with KMS support)  | Yes (with KMS support)   | Yes (with Azure Key Vault) | Yes                     | Yes (with KMS support)   | Yes                      | No                       |
+| **Best For**                       | Block storage for cloud-native apps | Block storage for Google Cloud apps | Managed disks for Azure apps | Block storage in distributed environments | High-availability, high-performance storage for containerized workloads | Cloud-native storage for Kubernetes with easy setup | Lightweight local storage solution for test/dev environments |
+| **Documentation**                 | [AWS EBS CSI Docs](https://docs.aws.amazon.com/eks/latest/userguide/persistent-storage-csi.html) | [GCE PD CSI Docs](https://kubernetes.io/docs/concepts/storage/volumes/#gce-pd) | [Azure Disk CSI Docs](https://learn.microsoft.com/en-us/azure/aks/azure-disk-csi-driver) | [Ceph CSI Docs](https://ceph.io/en/ceph-csi/) | [Portworx CSI Docs](https://docs.portworx.com/) | [Longhorn CSI Docs](https://longhorn.io/docs/) | [Localhost CSI Docs](https://github.com/kubernetes-csi/csi-driver-localpv) |
 
 ### Full Architecture Overview of Kubernetes CSI
 
@@ -96,17 +94,25 @@ Here’s a breakdown of the Kubernetes CSI architecture:
    - **Use Case**: Best for running mission-critical applications that require high performance and disaster recovery capabilities.
    - **Documentation**: [Portworx CSI Docs](https://docs.portworx.com/)
 
----
+#### 6. **Longhorn CSI Driver**:
+   - **Provider**: Longhorn (Cloud-native storage platform)
+   - **Best For**: Cloud-native storage for Kubernetes with ease of use and automated volume management.
+   - **Features**: 
+     - Distributed block storage
+     - Snapshot and backup support
+     - Multi-cluster support
+   - **Use Case**: Ideal for managing distributed storage in Kubernetes clusters with a focus on high availability and scalability.
+   - **Documentation**: [Longhorn CSI Docs](https://longhorn.io/docs/)
 
-### Summary:
-Kubernetes provides robust support for storage management through **CSI drivers**, allowing you to integrate with various cloud providers (AWS, GCP, Azure) or distributed storage solutions like **Ceph** and **Portworx**. Each driver comes with specific features such as dynamic provisioning, volume snapshots, and encryption support, which enhance storage flexibility and security within your Kubernetes clusters. Choosing the right CSI driver depends on your cloud platform, storage requirements, and scalability needs.
+#### 7. **Localhost CSI Driver**:
+   - **Provider**: Localhost (Local storage for Kubernetes clusters)
+   - **Best For**: Lightweight, local storage for test or development environments.
+   - **Features**: 
+     - Local persistent volumes
+     - Simple setup for non-cloud environments
+   - **Use Case**: Best for testing or local development environments that require quick and simple storage solutions.
+   - **Documentation**: [Localhost CSI Docs](https://github.com/kubernetes-csi/csi-driver-localpv)
 
----
-
-### Additional Resources:
-- [Kubernetes CSI Overview](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#container-storage-interface)
-- [CSI Specification GitHub](https://github.com/container-storage-interface/spec)
-- [Kubernetes Storage Documentation](https://kubernetes.io/docs/concepts/storage/)
 
 ### Examples 
 
