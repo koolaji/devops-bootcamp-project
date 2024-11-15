@@ -9,13 +9,15 @@ Flannel DaemonSet runs on every node, handling the network bridge and ensuring P
 How it works:
 
 Each node gets a subnet of IPs (usually from a larger IP pool).
-When a pod is created on a node, Flannel assigns an IP from the node's subnet.
+Flannel assigns an IP from the node's subnet when a pod is created on a node.
 Flannel ensures communication between Pods on different nodes by encapsulating traffic within an overlay network.
 Use cases:
 
-Simple networking setup, great for small to medium clusters.
+It is a simple networking setup that is great for small to medium clusters.
 Suitable for flat, non-hierarchical communication among Pods.
 Doce[https://mvallim.github.io/kubernetes-under-the-hood/documentation/kube-flannel.html]
+
+
 B. Calico
 Architecture:
 
