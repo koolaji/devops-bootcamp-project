@@ -12,7 +12,7 @@
 - Deploy Rancher on the RKE2 cluster using Helm in air-gapped mode.
 - Expose Rancher UI using a NodePort or Ingress.
 - **Documentation Reference:**
-  - [Rancher Air-Gap Installation Guide][https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster]
+  - [Rancher Air-Gap Installation Guide]*https://ranchermanager.docs.rancher.com/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster)
 
 ### 3. Deploy Zabbix
 - Deploy Zabbix Server, Web Frontend, and Agent.
