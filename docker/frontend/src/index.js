@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-const App = () => {
-  const [projects, setProjects] = useState([]);
+function App() {
+  const [apiResponse, setApiResponse] = React.useState('');
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/projects`)
-      .then((response) => response.json())
-      .then((data) => setProjects(data))
-      .catch((error) => console.error('Error fetching projects:', error));
+  React.useEffect(() => {
+    fetch('/api')
+      .then(res => res.json())
+      .then(data => setApiResponse(data.message))
+      .catch(() => setApiResponse('Error fetching from API'));
   }, []);
 
   return (
     <div>
-      <h1>Project Management</h1>
-      <ul>
-        {projects.map((project) => (
-          <li key={project.id}>{project.name}</li>
-        ))}
-      </ul>
+      <h1>Hello from the React Frontend!</h1>
+      <p><strong>Message from Backend:</strong> {apiResponse}</p>
     </div>
   );
-};
+}
 
-export default App;
-
+ReactDOM.render(<App />, document.getElementById('root'));

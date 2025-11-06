@@ -4,18 +4,18 @@ FROM node:14-alpine
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json to the working directory
-COPY package.json ./
+# Copy package.json and yarn.lock to leverage Docker cache
+COPY package.json yarn.lock* ./
 
-# Install dependencies, which creates yarn.lock if it doesn't exist
-RUN yarn install --frozen-lockfile || yarn install
+# Install dependencies
+RUN yarn install --frozen-lockfile
 
 # Copy the rest of your application files
 COPY . .
 
 # Expose the port your app runs on
-EXPOSE 3000
+EXPOSE 5000
 
 # Command to run your application
-CMD ["node", "server.js"]
+CMD ["node", "src/app.js"]
 
