@@ -2,20 +2,6 @@
 
 This repository contains educational bash scripts for teaching log analysis techniques. Each script is accompanied by questions and answers to facilitate classroom learning.
 
-## Teaching Objectives
-
-- Teach students different approaches to log analysis using bash scripting
-- Demonstrate parsing techniques for various data formats (text, JSON, CSV, YAML)
-- Show progression from basic to advanced scripting concepts
-- Provide hands-on examples for classroom exercises
-
-## How to Use This Guide
-
-1. Review the questions and answers for each script
-2. Demonstrate the scripts in class with sample log files
-3. Ask students the provided questions to test understanding
-4. Assign scripts as exercises, having students modify or extend them
-
 ## Main Scripts
 
 ### 01_text_log_analyzer.sh - Text Log Analysis
